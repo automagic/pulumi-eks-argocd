@@ -1,0 +1,3 @@
+name: eks-workshop-argocd
+runtime: nodejs
+description: A workshop using EKS and ArgoCD

@@ -1,16 +1,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import * as awsx from "@pulumi/awsx";
-import { SubnetType } from "@pulumi/awsx/ec2";
+import { NatGatewayStrategy, SubnetType } from "@pulumi/awsx/ec2";
 import * as eks from "@pulumi/eks";
 
-const name = 'jconnell-eks-argocd' // replace this with your name!
+const name = 'jconnell-eks' // replace this with your name!
 const clusName = `${name}-cluster`
 const clusterTag = `kubernetes.io/cluster/${clusName}`
 
 // this defines a valid VPC that can be used for EKS
 const vpc = new awsx.ec2.Vpc(`vpc-${name}`, {
     cidrBlock: "172.44.0.0/16",
+    natGateways: {
+        strategy: NatGatewayStrategy.Single,
+    },
     subnetSpecs: [
         {
             type: SubnetType.Private,

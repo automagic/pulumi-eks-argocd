@@ -1,2 +1,4 @@
+environment:
+  - aws
 config:
   aws:region: us-west-2
